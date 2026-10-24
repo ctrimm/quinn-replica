@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: "22"
+  NODE_VERSION: "22.23.4"
   # The Pages preview lives under a project subpath; the primary SST
   # deploy builds without these, for the domain root.
   SITE: "https://ctrimm.github.io"
