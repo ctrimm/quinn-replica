@@ -37,17 +37,21 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.01em;
 }
 
-/* Scroll reveal — the original fades elements in. Only elements below the
+/* Scroll reveal — elements rise into place. Only elements below the
    initial viewport get hidden (JS adds .pre); everything else is visible
-   by default, so content can never be stranded invisible. */
+   by default, so content can never be stranded invisible.
+   Deliberately NO opacity fade: a half-faded element is a half-blended
+   color, and accessibility audits (axe/Lighthouse) that snapshot a page
+   mid-transition report phantom contrast failures. Hidden here means
+   visibility: hidden — fully out of the accessibility tree until shown. */
 .reveal.pre {
-  opacity: 0;
+  visibility: hidden;
   transform: translateY(24px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transition: transform 0.7s ease;
 }
-.reveal.pre.in { opacity: 1; transform: none; }
+.reveal.pre.in { visibility: visible; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal.pre { opacity: 1; transform: none; transition: none; }
+  .reveal.pre { visibility: visible; transform: none; transition: none; }
 }
 
 /* ---------- Header ---------- */
