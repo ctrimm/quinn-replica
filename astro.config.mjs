@@ -8,7 +8,7 @@ import { defineConfig } from "astro/config";
 // SITE/BASE come from the environment (same pattern as ctrimm's other
 // Astro theme repos): local dev, tests and the SST deploy build for the
 // domain root, while the GitHub Pages workflow builds with
-//   SITE=https://ctrimm.github.io  BASE=/quinn-replica
+//   SITE=https://ctrimm.github.io  BASE=/vermilion-folio
 // so the preview works from its project subpath.
 const site = process.env.SITE || undefined;
 const base = process.env.BASE || undefined;

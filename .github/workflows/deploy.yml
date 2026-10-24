@@ -19,7 +19,7 @@ env:
   # The Pages preview lives under a project subpath; the primary SST
   # deploy builds without these, for the domain root.
   SITE: "https://ctrimm.github.io"
-  BASE: "/quinn-replica"
+  BASE: "/vermilion-folio"
 
 jobs:
   test:
@@ -67,9 +67,9 @@ jobs:
 
       - name: Smoke-check the subpath build
         run: |
-          grep -q 'href="/quinn-replica/info"' dist/index.html
-          grep -q 'src="/quinn-replica/images/hero.jpg"' dist/index.html
-          grep -q 'url("/quinn-replica/fonts/bodoni-moda-normal.woff2")' dist/index.html
+          grep -q 'href="/vermilion-folio/info"' dist/index.html
+          grep -q 'src="/vermilion-folio/images/hero.jpg"' dist/index.html
+          grep -q 'url("/vermilion-folio/fonts/bodoni-moda-normal.woff2")' dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

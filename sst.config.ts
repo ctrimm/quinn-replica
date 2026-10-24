@@ -1,7 +1,7 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
 /**
- * quinn-replica — Quinn-style portfolio site.
+ * vermilion-folio — editorial portfolio template.
  *
  * Static Astro 7 site on S3 + CloudFront via SST v3.
  *
@@ -14,7 +14,7 @@
 export default $config({
   app(input) {
     return {
-      name: "quinn-replica",
+      name: "vermilion-folio",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
       home: "aws",

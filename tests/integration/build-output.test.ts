@@ -100,18 +100,15 @@ describe("build output: structured data for AI agents and search", () => {
   });
 });
 
-describe("build output: no leftovers from the original template demo", () => {
+describe("build output: no placeholder content ships", () => {
   const allHtml = () =>
     ["index.html", "info/index.html", "selectworks/index.html"]
       .map(read)
       .join("\n");
-  it("contains no trace of the demo persona", () => {
-    expect(allHtml()).not.toMatch(/Pia Quinn|pia-quinn|hello@pia/);
+  it("contains no lorem ipsum, TODO or example-domain filler", () => {
+    expect(allHtml()).not.toMatch(/lorem|TODO|example\.(com|org|net)/i);
   });
-  it("contains no demo project slugs", () => {
-    expect(allHtml()).not.toMatch(/203issue|sqspmagazine|editorialstyling|streetstyle/);
-  });
-  it("contains no Squarespace CDN image URLs", () => {
-    expect(allHtml()).not.toMatch(/squarespace-cdn/);
+  it("loads every image locally — no hotlinked or CDN placeholder photos", () => {
+    expect(allHtml()).not.toMatch(/<img[^>]+src="https?:/);
   });
 });

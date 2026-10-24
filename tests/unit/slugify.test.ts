@@ -6,7 +6,7 @@ describe("slugify", () => {
     expect(slugify("Palmetto Issue")).toBe("palmetto-issue");
   });
   it("handles all caps", () => {
-    expect(slugify("SQSP MAGAZINE")).toBe("sqsp-magazine");
+    expect(slugify("ACME MAGAZINE")).toBe("acme-magazine");
   });
   it("keeps numbers", () => {
     expect(slugify("203 Issue")).toBe("203-issue");

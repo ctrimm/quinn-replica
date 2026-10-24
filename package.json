@@ -2,7 +2,7 @@
   "dependencies": {
     "astro": "^7.4.2"
   },
-  "description": "Quinn-style portfolio site \u2014 Astro 7 + SST v3 (S3 + CloudFront). Stylistic replica of the Squarespace Quinn template, not a 1:1 copy.",
+  "description": "Vermilion Folio \u2014 an editorial portfolio template. Astro 7 + SST v3 (S3 + CloudFront). Giant serif display type, one vermilion accent on warm grey, config-driven content.",
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "lighthouse": "^13.5.0",
@@ -10,7 +10,7 @@
     "typescript": "^5.6.0",
     "vitest": "^5.0.5"
   },
-  "name": "quinn-replica",
+  "name": "vermilion-folio",
   "scripts": {
     "build": "astro build",
     "deploy": "sst deploy",

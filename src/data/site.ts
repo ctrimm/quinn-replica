@@ -239,7 +239,7 @@ export function mailto(email: string): string {
 
 /**
  * The site is normally served from a domain root (SST/CloudFront), but the
- * GitHub Pages preview lives under a subpath (/quinn-replica). Astro
+ * GitHub Pages preview lives under a subpath (/vermilion-folio). Astro
  * exposes that as import.meta.env.BASE_URL; url() prefixes internal paths
  * with it. In root mode BASE_URL is "/" and url() returns paths unchanged.
  */
