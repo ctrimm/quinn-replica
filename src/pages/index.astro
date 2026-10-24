@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import ClientList from "../components/ClientList.astro";
+import { site, projects, imgSrcset, url } from "../data/site";
+
+const home = site.home;
+---
+
+<Base title={`${site.name.toUpperCase()}`} current="home">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-email label-serif">{site.email}</div>
+    <h1 class="hero-word">
+      {home.heroLines.map((line) => (
+        <span class="hero-line">{line}</span>
+      ))}
+    </h1>
+    <div class="hero-photo">
+      <img src={url(home.heroImage)} alt={home.heroImageAlt} width="1400" height="933" fetchpriority="high" srcset={imgSrcset(home.heroImage, [480, 720, 960], 1400)} sizes="(max-width: 720px) 72vw, 40vw" />
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="intro reveal">
+    <div class="intro-copy">
+      {home.intro.map((p) => <p>{p}</p>)}
+    </div>
+    <div class="intro-name">
+      <div class="name">{site.name}</div>
+      <div class="role label-serif">{site.role}</div>
+    </div>
+  </section>
+
+  <!-- Select Works preview -->
+  <section class="works-band">
+    <a class="band-link label-serif" href={url("/selectworks")}>Select Works</a>
+    <div class="thumb-row reveal">
+      {projects.map((p) => (
+        <a href={url(`/${p.slug}`)} aria-label={`View project: ${p.title}`}>
+          <img src={url(p.image)} alt={p.title} width="800" height="800" loading="lazy" srcset={imgSrcset(p.image, [480], 800)} sizes="(max-width: 720px) 46vw, 24vw" />
+        </a>
+      ))}
+    </div>
+    <ul class="project-stack reveal">
+      {projects.map((p) => (
+        <li><a href={url(`/${p.slug}`)}>{p.title}</a></li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Consulting -->
+  <section class="consulting reveal">
+    <div class="consulting-copy">
+      {home.consulting.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- Latest project -->
+  <section class="latest reveal">
+    <img src={url(home.latest.image)} alt={home.latest.imageAlt} width="1100" height="1650" loading="lazy" srcset={imgSrcset(home.latest.image, [550], 1100)} sizes="(max-width: 720px) 92vw, 33vw" />
+    <div class="latest-meta">
+      <span class="label-serif">{home.latest.label}</span>
+      <p>{home.latest.lines.map((l) => <>{l}<br /></>)}</p>
+    </div>
+  </section>
+
+  <ClientList />
+</Base>

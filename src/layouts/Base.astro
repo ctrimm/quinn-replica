@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+import { site, mailto, themeCssVars, url, fontFaceCss } from "../data/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: "home" | "info" | "works" | "project";
+}
+const { title, current } = Astro.props;
+const description =
+  Astro.props.description ??
+  `${site.name} — ${site.role}. Portfolio of selected works, client list and contact.`;
+const canonical = site.siteUrl ? new URL(Astro.url.pathname, site.siteUrl).href : undefined;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  jobTitle: site.role,
+  email: site.email,
+  ...(site.siteUrl ? { url: site.siteUrl } : {}),
+  sameAs: site.socials.filter((s) => s.href.startsWith("http")).map((s) => s.href),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={url(site.home.heroImage)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
+    <link rel="preload" href={url(site.fonts.serifFile)} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={url(site.fonts.sansFile)} as="font" type="font/woff2" crossorigin />
+    <title>{title}</title>
+    <style set:html={fontFaceCss()}></style>
+    <style set:html={themeCssVars(site.theme)}></style>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-title" href={url("/")}>{site.name}</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href={url("/info")} class={current === "info" ? "active" : undefined} aria-current={current === "info" ? "page" : undefined}>Info</a>
+        <a href={url("/selectworks")} class={current === "works" || current === "project" ? "active" : undefined} aria-current={current === "works" ? "page" : undefined}>Select Works</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-name">{site.name}</div>
+      <a class="footer-email label-serif" href={mailto(site.email)}>{site.email}</a>
+      <div class="footer-bottom">
+        <span>{site.credit}</span>
+        <span class="footer-socials">
+          {site.socials.map((s, i) => (
+            <>
+              {i > 0 && ", "}
+              <a href={url(s.href)}>{s.label}</a>
+            </>
+          ))}
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.12 }
+      );
+      // Read all positions first (one layout pass), then write classes —
+      // interleaving reads and writes would force a reflow per element.
+      const belowFold = [...document.querySelectorAll(".reveal")].filter(
+        (el) => el.getBoundingClientRect().top > window.innerHeight * 0.95
+      );
+      belowFold.forEach((el) => {
+        el.classList.add("pre");
+        io.observe(el);
+      });
+      // Fallback: never leave content hidden if the observer misses a beat.
+      setTimeout(
+        () => document.querySelectorAll(".reveal.pre").forEach((el) => el.classList.add("in")),
+        2500
+      );
+    </script>
+  </body>
+</html>

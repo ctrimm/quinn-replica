@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, projects, imgSrcset, url } from "../data/site";
+---
+
+<Base title={`Select Works — ${site.name.toUpperCase()}`} current="works">
+  <section class="works-page">
+    <h1 class="label-serif works-heading">Select Works</h1>
+    {
+      projects.map((p, i) => (
+        <article class="work-entry reveal">
+          <div>
+            <h2>{p.title}</h2>
+            <a class="view" href={url(`/${p.slug}`)}>View project: {p.title}</a>
+          </div>
+          <a href={url(`/${p.slug}`)} aria-label={`View project: ${p.title}`}>
+            <img src={url(p.image)} alt={p.title} width="800" height="800" loading={i === 0 ? "eager" : "lazy"} fetchpriority={i === 0 ? "high" : undefined} srcset={imgSrcset(p.image, [480], 800)} sizes="(max-width: 980px) 92vw, 46vw" />
+          </a>
+        </article>
+      ))
+    }
+  </section>
+</Base>

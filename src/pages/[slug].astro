@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, projectRoutes, imgSrcset, url } from "../data/site";
+
+export function getStaticPaths() {
+  return projectRoutes();
+}
+
+const { project, next } = Astro.props;
+---
+
+<Base title={`${project.title.toUpperCase()} — ${site.name.toUpperCase()}`} current="project" description={project.summary}>
+  <section class="project-hero">
+    <span class="label-serif">{project.category}</span>
+    <h1>{project.title}</h1>
+  </section>
+
+  <section class="project-body">
+    <p>{project.summary}</p>
+    <img src={url(project.image)} alt={project.title} width="800" height="800" srcset={imgSrcset(project.image, [480, 1600], 800)} sizes="(max-width: 720px) 92vw, 62vw" />
+  </section>
+
+  <div class="project-next">
+    Next project — <a href={url(`/${next.slug}`)}>{next.title}</a>
+  </div>
+</Base>

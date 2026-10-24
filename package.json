@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "astro": "^7.4.2"
+  },
+  "description": "Quinn-style portfolio site \u2014 Astro 7 + SST v3 (S3 + CloudFront). Stylistic replica of the Squarespace Quinn template, not a 1:1 copy.",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "lighthouse": "^13.5.0",
+    "sst": "^3.19.3",
+    "typescript": "^5.6.0",
+    "vitest": "^5.0.5"
+  },
+  "name": "quinn-replica",
+  "scripts": {
+    "build": "astro build",
+    "deploy": "sst deploy",
+    "deploy:production": "sst deploy --stage production",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "test": "vitest run tests/unit",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "test:all": "npm run test:unit && npm run test:integration && npm run test:e2e",
+    "grade": "node scripts/lighthouse.mjs",
+    "verify": "npm run test:all && npm run grade",
+    "grade:ci": "node scripts/lighthouse.mjs --ci"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

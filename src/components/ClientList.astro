@@ -1,0 +1,15 @@
+---
+import { clients } from "../data/site";
+---
+
+<section class="client-list reveal">
+  {
+    clients.map((c, i) => (
+      <div class="client-row">
+        {i === 0 ? <span class="label-serif">Client List</span> : <span />}
+        <span class="client-role">{c.role}</span>
+        <span class="client-name">{c.name}</span>
+      </div>
+    ))
+  }
+</section>

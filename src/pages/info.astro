@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import ClientList from "../components/ClientList.astro";
+import { site, imgSrcset, url } from "../data/site";
+
+const info = site.info;
+---
+
+<Base title={`Info — ${site.name.toUpperCase()}`} current="info">
+  <section class="info-top">
+    <div>
+      <h1 class="label-serif info-role">{site.role}</h1>
+      <div class="info-copy">
+        {info.bio.map((p) => <p>{p}</p>)}
+        <p>{info.availability}</p>
+      </div>
+    </div>
+    <div class="info-photo">
+      <img src={url(info.image)} alt={info.imageAlt} width="1100" height="1650" srcset={imgSrcset(info.image, [550], 1100)} sizes="(max-width: 720px) 92vw, 52vw" />
+    </div>
+  </section>
+
+  <ClientList />
+</Base>
