@@ -57,7 +57,7 @@ const home = site.home;
 
   <!-- Latest project -->
   <section class="latest reveal">
-    <img src={url(home.latest.image)} alt={home.latest.imageAlt} width="1100" height="1650" loading="lazy" srcset={imgSrcset(home.latest.image, [550], 1100)} sizes="(max-width: 720px) 92vw, 33vw" />
+    <img src={url(home.latest.image)} alt={home.latest.imageAlt} width="1100" height="1650" loading="lazy" srcset={imgSrcset(home.latest.image, [550, 800], 1100)} sizes="(max-width: 720px) 92vw, 33vw" />
     <div class="latest-meta">
       <span class="label-serif">{home.latest.label}</span>
       <p>{home.latest.lines.map((l) => <>{l}<br /></>)}</p>

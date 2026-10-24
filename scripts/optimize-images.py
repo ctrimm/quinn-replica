@@ -12,7 +12,7 @@ from pathlib import Path
 from PIL import Image, ImageFilter
 
 IMAGES = Path(__file__).resolve().parent.parent / "public" / "images"
-PLAN = {"hero": [480, 960], "work": [480, 1600], "default": [550]}
+PLAN = {"hero": [480, 720, 960], "work": [480, 1600], "default": [550, 800]}
 
 for f in sorted(IMAGES.glob("*.jpg")):
     if any(f.stem.endswith(f"-{w}") for w in (480, 550, 960, 1600)):
