@@ -49,6 +49,13 @@ jobs:
     name: Build for GitHub Pages
     needs: test
     runs-on: ubuntu-latest
+    # SITE/BASE are scoped to this job only. They must NOT leak into the
+    # test job: with BASE set, the e2e suite's preview server serves the
+    # site under the subpath and Playwright's root-URL check times out
+    # (found the hard way — Deploy's tests failed while CI's passed).
+    env:
+      SITE: "https://ctrimm.github.io"
+      BASE: "/vermilion-folio"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
