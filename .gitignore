@@ -28,6 +28,7 @@ reports/
 # working screenshots (final-hero.png is kept — it's the README preview)
 screenshots/*
 !screenshots/final-hero.png
+!screenshots/prettysnap-*.png
 
 # macOS-specific files
 .DS_Store

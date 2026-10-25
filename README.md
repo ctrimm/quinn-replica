@@ -8,7 +8,7 @@
 
 **Live preview: https://ctrimm.github.io/vermilion-folio/**
 
-![Tessa Marlowe portfolio — hero](screenshots/final-hero.png)
+![Tessa Marlowe portfolio — hero, framed with PrettySnap](screenshots/prettysnap-home.png)
 
 **Edit one config file, get a portfolio** · **129 automated tests** · **Lighthouse Accessibility / Best Practices / SEO = 100** · **AI-readable (llms.txt, JSON-LD)**
 
@@ -16,6 +16,17 @@ The portfolio persona — **Tessa Marlowe**, stylist & creative director — is
 fully fictional, created for this site. All copy is original
 (it lives in `portfolio.config.ts`) and all 7 photographs are AI-generated
 for this project (originals in `source-images/`).
+
+## Screenshots
+
+All framed with PrettySnap on the same warm cream background.
+
+![Home](screenshots/prettysnap-home.png)
+![Select Works](screenshots/prettysnap-works.png)
+![Project — Atelier Quarterly](screenshots/prettysnap-project.png)
+![Project — Concrete Poems](screenshots/prettysnap-project2.png)
+![Info](screenshots/prettysnap-info.png)
+![Mobile home](screenshots/prettysnap-mobile.png)
 
 ## Stack
 - **Astro 7.4** (static output)
