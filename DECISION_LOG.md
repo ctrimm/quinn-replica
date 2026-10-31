@@ -35,3 +35,19 @@
 - CI failure #2: Lighthouse a11y 95 on home in CI only — axe snapshot caught reveal text mid-opacity-fade (blended colors #d1a299 ≈ 1.62:1). Fix: reveal is rise-only (transform), hidden state is visibility:hidden; no blended state exists at any moment. (An earlier attempt at this fix silently didn't land — the CSS pattern didn't match; verified in the file this time.)
 - CI perf: home scored 79 on the shared runner vs 95-99 locally; TBT 730 ms vs 10 ms on identical code. Decision (gov-starter stance): CI hard-gates a11y/BP/SEO at 100, performance is report-only in CI; strict all-100 remains the local `npm run grade` bar.
 - Pages enabled via API (build_type=workflow) — no manual Settings step needed with the current token.
+
+## 2026-10-30 — Micro-interactions pass
+
+- CSS-only motion layer appended to `src/styles/global.css` (one marked
+  section, removable as a block): nav underline sweeps, image zooms
+  inside their frames (`a:has(> img)` + overflow hidden), index-row
+  name/arrow slides, pill lifts with a press settle, chip rises, row
+  leans, next-link arrows, footer-email underline sweeps, accent text
+  selection, and visible focus rings.
+- Hero motion is a slow transform-only "ken burns" drift (14–18s,
+  alternate) — composited, no layout shift, no Lighthouse CLS cost.
+- Hard rules kept from the series: no opacity fades on content (axe
+  snapshots mid-fade report phantom contrast failures), and a
+  `prefers-reduced-motion` block stills every new animation/transition.
+- Verified: full test suites green and Lighthouse Accessibility /
+  Best Practices / SEO still 100 after the change.

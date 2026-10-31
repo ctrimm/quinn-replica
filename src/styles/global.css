@@ -221,3 +221,84 @@ img { display: block; max-width: 100%; }
   .latest, .work-entry { grid-template-columns: 1fr; }
   .client-row { grid-template-columns: 1fr; gap: 2px; padding: 14px 0; }
 }
+
+/* ---------- Micro-interactions ----------
+   Small motions in the editorial idiom: the giant word rises in on
+   load, headlines lean toward the cursor, photographs zoom a breath.
+   Transform and color transitions only — never opacity fades on
+   content (see the reveal note above) — and everything stops for
+   reduced motion. */
+
+::selection { background: var(--accent); color: #fff; }
+:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+
+/* Nav: underline grows from the left */
+.site-nav a {
+  background: linear-gradient(currentColor, currentColor) left calc(100% - 1px) / 0% 1px no-repeat;
+  transition: background-size 0.35s ease;
+  padding-bottom: 3px;
+}
+.site-nav a:hover { background-size: 100% 1px; opacity: 1; }
+
+/* The giant hero word rises into place, line by line */
+@keyframes word-in {
+  from { transform: translateY(3vw); }
+  to { transform: translateY(0); }
+}
+.hero-line { animation: word-in 0.9s cubic-bezier(0.22, 0.61, 0.21, 1) both; }
+.hero-line:nth-child(2) { animation-delay: 0.12s; }
+.hero-line:nth-child(3) { animation-delay: 0.24s; }
+
+/* The hero photograph breathes, very slowly */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+.hero-photo img { animation: kenburns 14s ease-in-out infinite alternate; }
+
+/* Linked photographs zoom a breath inside their frame */
+a:has(> img) { display: block; overflow: hidden; }
+a:has(> img) > img { transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.21, 1); }
+a:has(> img):hover > img { transform: scale(1.04); }
+
+/* The project stack leans toward the cursor and warms to vermilion */
+.project-stack a { transition: transform 0.35s ease, color 0.35s ease; }
+.project-stack a:hover { transform: translateX(14px); color: var(--accent); }
+
+/* Work entries: the headline's tracking opens up on hover */
+.work-entry h2 { transition: letter-spacing 0.4s ease; }
+.work-entry:hover h2 { letter-spacing: -0.005em; }
+
+/* Client names slide a step on row hover */
+.client-name { display: inline-block; transition: transform 0.35s ease; }
+.client-row:hover .client-name { transform: translateX(8px); }
+
+/* Underlined links: the underline leans in */
+.band-link, .view, .project-next a, .footer-socials a {
+  transition: text-underline-offset 0.3s ease, color 0.3s ease;
+}
+.band-link:hover, .view:hover, .project-next a:hover { text-underline-offset: 7px; color: var(--accent); opacity: 1; }
+
+/* Next-project link grows an arrow that nudges forward */
+.project-next a::after {
+  content: " \2192";
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.project-next a:hover::after { transform: translateX(4px); }
+
+/* Footer email: underline sweep */
+.footer-email {
+  background: linear-gradient(currentColor, currentColor) left calc(100% - 2px) / 0% 1px no-repeat;
+  transition: background-size 0.4s ease;
+  padding-bottom: 4px;
+}
+.footer-email:hover { background-size: 100% 1px; opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
